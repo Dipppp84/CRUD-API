@@ -15,9 +15,9 @@ export async function save(user: User): Promise<User> {
 
 export async function update(user: User): Promise<User> {
     const updateUser = DAO.get(user.id);
-    updateUser.username = user.username;
-    updateUser.hobbies = user.hobbies;
-    updateUser.age = user.age;
+    if (updateUser.username) updateUser.username = user.username;
+    if (updateUser.hobbies) updateUser.hobbies = user.hobbies;
+    if (updateUser.age) updateUser.age = user.age;
     return user;
 }
 

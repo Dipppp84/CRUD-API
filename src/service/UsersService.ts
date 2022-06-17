@@ -25,10 +25,10 @@ export async function save(user: User): Promise<User> {
     return await UserDAO.save(user);
 }
 
-export async function update(user: User): Promise<User> {
-    if (!checkValidUuid(user.id))
+export async function update(id: string, user: User): Promise<User> {
+    if (!checkValidUuid(id))
         throw new MyError(400, 'userId is invalid');
-    const checkUser = await UserDAO.findById(user.id);
+    const checkUser = await UserDAO.findById(id);
     if (!checkUser)
         throw new MyError(404, 'Not found');
     return await UserDAO.update(user);
