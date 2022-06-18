@@ -2,7 +2,7 @@ import {OutgoingHttpHeaders, ServerResponse} from "http";
 import {MyError} from "../model/MyError.js";
 
 const header: OutgoingHttpHeaders = {
-    'content-type': 'txt/json'
+    'content-type': 'application/json'
 };
 
 export function handlerError(res: ServerResponse, err: MyError | Error): void {

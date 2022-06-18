@@ -3,11 +3,8 @@ import {randomUUID} from "crypto";
 import {MyError} from '../model/MyError.js'
 import {User} from '../model/User.js'
 
-save({id: null , age: 1, hobbies:['node JS','anime'],username: 'name1'})
-
 export async function findById(id: string): Promise<User> {
-    if (!checkValidUuid(id))
-        throw new MyError(400, 'userId is invalid');
+    checkValidUuid(id);
     const user = await UserDAO.findById(id);
     if (!user)
         throw new MyError(404, 'Not found');
@@ -26,22 +23,21 @@ export async function save(user: User): Promise<User> {
 }
 
 export async function update(id: string, user: User): Promise<User> {
-    if (!checkValidUuid(id))
-        throw new MyError(400, 'userId is invalid');
+    checkValidUuid(id);
     const checkUser = await UserDAO.findById(id);
     if (!checkUser)
         throw new MyError(404, 'Not found');
-    return await UserDAO.update(user);
+    return await UserDAO.update(id, user);
 }
 
 export async function remove(id: string): Promise<void> {
-    if (!checkValidUuid(id))
-        throw new MyError(400, 'userId is invalid');
+    checkValidUuid(id);
     const removeBoolean = await UserDAO.remove(id);
     if (!removeBoolean)
         throw new MyError(404, 'Not found');
 }
 
-function checkValidUuid(uuid: string): boolean {
-    return uuid.length === 36 && uuid.split('-').length === 5;
+function checkValidUuid(uuid: string): void {
+    if (!(uuid.length === 36 && uuid.split('-').length === 5))
+        throw new MyError(400, 'userId is invalid');
 }

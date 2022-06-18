@@ -13,12 +13,12 @@ export async function save(user: User): Promise<User> {
     return user;
 }
 
-export async function update(user: User): Promise<User> {
-    const updateUser = DAO.get(user.id);
-    if (updateUser.username) updateUser.username = user.username;
-    if (updateUser.hobbies) updateUser.hobbies = user.hobbies;
-    if (updateUser.age) updateUser.age = user.age;
-    return user;
+export async function update(id: string, user: User): Promise<User> {
+    const baseUser = DAO.get(id);
+    !Boolean(user.username) || (baseUser.username = user.username);
+    !user.hobbies || (baseUser.hobbies = user.hobbies);
+    !user.age || (baseUser.age = user.age);
+    return baseUser;
 }
 
 export async function remove(id: string): Promise<boolean> {
