@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Dipppp84/CRUD-API#readme",
   "devDependencies": {
     "jest": "^28.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
   }
 }

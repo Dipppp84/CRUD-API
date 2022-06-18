@@ -1,9 +1,9 @@
 import {IncomingMessage, OutgoingHttpHeaders, ServerResponse} from "http";
-import {MyError} from "../model/MyError";
 import {ParsedPath} from "path";
-import * as UserService from "../service/UsersService";
-import {User} from "../model/User";
-import {handlerError} from "../service/ErrorService";
+import * as UserService from "../service/UsersService.js";
+import {MyError} from "../model/MyError.js";
+import {User} from "../model/User.js";
+import {handlerError} from "../service/ErrorService.js";
 
 const header: OutgoingHttpHeaders = {
     'content-type': 'txt/json'
